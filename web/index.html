@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>低延迟直播 · 播放器</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>🏟️ 校园运动会低延迟直播</h1>
+      <nav>
+        <a href="./index.html" class="active">播放器</a>
+        <a href="./debug.html">调试台</a>
+        <a href="./stats.html">观众统计</a>
+      </nav>
+    </header>
+    <main class="grid">
+      <div class="row">
+        <div id="venue-tabs" class="row"></div>
+        <span class="spacer"></span>
+        <span id="live-pill" class="pill"><span class="dot"></span><span id="live-text">连接中…</span></span>
+      </div>
+
+      <div class="stage" id="stage"></div>
+
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr))">
+        <div class="stat-grid" style="grid-column: 1 / -1">
+          <div class="stat"><div class="k">端到端延迟</div><div class="v"><span id="s-latency">–</span><small> ms</small></div></div>
+          <div class="stat"><div class="k">起播耗时</div><div class="v"><span id="s-startup">–</span><small> ms</small></div></div>
+          <div class="stat"><div class="k">卡顿次数</div><div class="v"><span id="s-stalls">0</span><small> 次</small></div></div>
+          <div class="stat"><div class="k">卡顿时长</div><div class="v"><span id="s-stallms">0</span><small> ms</small></div></div>
+          <div class="stat"><div class="k">当前码率</div><div class="v"><span id="s-bitrate">–</span><small> bps</small></div></div>
+          <div class="stat"><div class="k">播放速率</div><div class="v"><span id="s-rate">1.00</span><small> ×</small></div></div>
+          <div class="stat"><div class="k">缓冲</div><div class="v"><span id="s-buffer">–</span><small> ms</small></div></div>
+          <div class="stat"><div class="k">带宽估计</div><div class="v"><span id="s-bw">–</span><small> bps</small></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>码率自适应</h2>
+        <div class="row">
+          <label class="field" style="flex-direction: row; align-items: center; gap: 8px">
+            <input type="checkbox" id="abr-toggle" checked /> 自动 ABR
+          </label>
+          <select id="rendition-select" disabled></select>
+          <span class="small" id="switch-count">档位切换 0 次 · 赛场切换 0 次</span>
+        </div>
+      </div>
+
+      <div class="grid" style="grid-template-columns: 1fr 1fr">
+        <div class="card"><h2>实时延迟（ms）</h2><div id="chart-latency"></div></div>
+        <div class="card"><h2>实时缓冲与码率</h2><div id="chart-buffer"></div></div>
+      </div>
+
+      <div class="card">
+        <h2>事件日志</h2>
+        <div class="log" id="log"></div>
+      </div>
+    </main>
+    <script type="module" src="./app.ts"></script>
+  </body>
+</html>

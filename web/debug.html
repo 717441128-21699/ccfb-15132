@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>调试台 · 低延迟直播</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>🛠️ 网络调试台</h1>
+      <nav>
+        <a href="./index.html">播放器</a>
+        <a href="./debug.html" class="active">调试台</a>
+        <a href="./stats.html">观众统计</a>
+      </nav>
+    </header>
+    <main class="grid">
+      <div class="grid" style="grid-template-columns: 320px 1fr; align-items: start">
+        <div class="card grid" style="gap: 14px">
+          <h2>网络模拟参数</h2>
+          <label class="field">赛场
+            <select id="venue-select"></select>
+          </label>
+          <label class="field">带宽上限 <span class="val" id="bw-val">不限</span>
+            <input type="range" id="bw" min="0" max="6000" step="50" value="0" />
+          </label>
+          <label class="field">固定延迟 <span class="val"><span id="lat-val">0</span> ms</span>
+            <input type="range" id="lat" min="0" max="2000" step="10" value="0" />
+          </label>
+          <label class="field">抖动 ±<span class="val"><span id="jit-val">0</span> ms</span>
+            <input type="range" id="jit" min="0" max="1000" step="10" value="0" />
+          </label>
+          <label class="field">丢包率 <span class="val"><span id="loss-val">0</span> %</span>
+            <input type="range" id="loss" min="0" max="30" step="1" value="0" />
+          </label>
+          <label class="field">随机种子（可复现）
+            <input type="number" id="seed" value="42" />
+          </label>
+          <div class="row">
+            <button class="btn primary" id="apply">应用并重新拉流</button>
+            <button class="btn" id="reset">重置</button>
+          </div>
+          <div class="card" style="background: var(--panel-2)">
+            <h2>抖动预设</h2>
+            <div class="row" id="presets"></div>
+          </div>
+        </div>
+
+        <div class="grid" style="gap: 16px">
+          <div class="stage" id="stage"></div>
+          <div class="stat-grid">
+            <div class="stat"><div class="k">端到端延迟</div><div class="v"><span id="s-latency">–</span><small> ms</small></div></div>
+            <div class="stat"><div class="k">卡顿</div><div class="v"><span id="s-stalls">0</span><small> 次 / </small><span id="s-stallms">0</span><small> ms</small></div></div>
+            <div class="stat"><div class="k">码率档位</div><div class="v"><span id="s-rend">–</span></div></div>
+            <div class="stat"><div class="k">实测吞吐</div><div class="v"><span id="s-bw">–</span><small> bps</small></div></div>
+            <div class="stat"><div class="k">播放速率</div><div class="v"><span id="s-rate">1.00</span><small>×</small></div></div>
+            <div class="stat"><div class="k">缓冲</div><div class="v"><span id="s-buffer">–</span><small> ms</small></div></div>
+          </div>
+          <div class="grid" style="grid-template-columns: 1fr 1fr">
+            <div class="card"><h2>延迟曲线（含 3s 目标线）</h2><div id="chart-latency"></div></div>
+            <div class="card"><h2>吞吐 / 码率（bps）</h2><div id="chart-bw"></div></div>
+          </div>
+          <div class="card"><h2>事件日志</h2><div class="log" id="log"></div></div>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="./debug.ts"></script>
+  </body>
+</html>

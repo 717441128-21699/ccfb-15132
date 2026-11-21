@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>观众统计 · 低延迟直播</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>📊 观众端统计</h1>
+      <nav>
+        <a href="./index.html">播放器</a>
+        <a href="./debug.html">调试台</a>
+        <a href="./stats.html" class="active">观众统计</a>
+      </nav>
+    </header>
+    <main class="grid">
+      <div class="row">
+        <span class="pill"><span class="dot"></span>在线观众 <b id="online-count">0</b></span>
+        <span class="small" id="updated-at"></span>
+        <span class="spacer"></span>
+        <label class="small" style="flex-direction: row; align-items: center; gap: 6px">
+          自动刷新
+          <select id="interval">
+            <option value="1000">1s</option>
+            <option value="2000" selected>2s</option>
+            <option value="5000">5s</option>
+            <option value="0">关闭</option>
+          </select>
+        </label>
+        <button class="btn" id="refresh">立即刷新</button>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat"><div class="k">平均起播耗时</div><div class="v"><span id="avg-startup">–</span><small> ms</small></div></div>
+        <div class="stat"><div class="k">平均延迟</div><div class="v"><span id="avg-latency">–</span><small> ms</small></div></div>
+        <div class="stat"><div class="k">卡顿观众占比</div><div class="v"><span id="stall-ratio">–</span><small> %</small></div></div>
+        <div class="stat"><div class="k">总卡顿次数</div><div class="v" id="total-stalls">0</div></div>
+      </div>
+
+      <div class="card">
+        <h2>观众明细（按最近上报排序，120s 无心跳自动下线）</h2>
+        <div style="overflow-x: auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Session</th><th>赛场</th><th>起播时间</th><th>起播耗时</th>
+                <th>卡顿次数</th><th>卡顿时长</th><th>当前延迟</th><th>档位切换</th><th>赛场切换</th><th>状态</th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="./stats.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,82 @@
+:root {
+  --bg: #0e1116;
+  --panel: #161b22;
+  --panel-2: #1c232d;
+  --border: #2a323d;
+  --fg: #e6edf3;
+  --muted: #9aa7b4;
+  --accent: #3a86ff;
+  --good: #06d6a0;
+  --warn: #ffb703;
+  --bad: #fb5607;
+  --radius: 10px;
+  font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg); }
+a { color: var(--accent); text-decoration: none; }
+header.topbar {
+  display: flex; align-items: center; gap: 18px;
+  padding: 12px 20px; background: var(--panel); border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 10;
+}
+header.topbar h1 { font-size: 17px; margin: 0; font-weight: 600; }
+header.topbar nav { display: flex; gap: 14px; margin-left: auto; }
+header.topbar nav a { color: var(--muted); font-size: 14px; padding: 4px 10px; border-radius: 6px; }
+header.topbar nav a.active, header.topbar nav a:hover { color: var(--fg); background: var(--panel-2); }
+main { padding: 20px; max-width: 1400px; margin: 0 auto; }
+.grid { display: grid; gap: 16px; }
+.card {
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px;
+}
+.card h2 { font-size: 14px; margin: 0 0 12px; color: var(--muted); font-weight: 600; letter-spacing: .04em; }
+.btn {
+  background: var(--panel-2); color: var(--fg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 14px; cursor: pointer; font-size: 14px;
+}
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+select, input[type='text'], input[type='number'] {
+  background: var(--panel-2); color: var(--fg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 8px 10px; font-size: 14px;
+}
+input[type='range'] { accent-color: var(--accent); width: 100%; }
+label.field { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--muted); }
+.stage {
+  position: relative; width: 100%; aspect-ratio: 16 / 9;
+  background: #000; border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--border);
+}
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--panel-2); border: 1px solid var(--border);
+  border-radius: 999px; padding: 4px 12px; font-size: 13px;
+}
+.pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--good); }
+.pill.stall .dot { background: var(--bad); }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.stat { background: var(--panel-2); border-radius: 8px; padding: 12px; }
+.stat .k { font-size: 12px; color: var(--muted); }
+.stat .v { font-size: 22px; font-weight: 600; margin-top: 4px; font-variant-numeric: tabular-nums; }
+.stat .v small { font-size: 12px; color: var(--muted); font-weight: 400; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--border); }
+th { color: var(--muted); font-weight: 600; }
+td.num { font-variant-numeric: tabular-nums; }
+.badge { padding: 2px 8px; border-radius: 999px; font-size: 12px; border: 1px solid var(--border); }
+.badge.good { color: var(--good); border-color: var(--good); }
+.badge.warn { color: var(--warn); border-color: var(--warn); }
+.badge.bad { color: var(--bad); border-color: var(--bad); }
+.log {
+  height: 180px; overflow-y: auto; font-family: ui-monospace, 'Cascadia Code', monospace;
+  font-size: 12px; background: #0b0e13; border: 1px solid var(--border); border-radius: 8px; padding: 10px;
+}
+.log div { padding: 2px 0; color: var(--muted); }
+canvas.chart { width: 100%; height: 220px; display: block; }
+.row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.spacer { flex: 1; }
+.small { font-size: 12px; color: var(--muted); }
+input[type='range'] + .val { font-variant-numeric: tabular-nums; color: var(--fg); font-size: 13px; }
